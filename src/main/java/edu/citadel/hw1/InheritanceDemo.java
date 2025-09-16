@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @Slf4j
 public class InheritanceDemo {
-    private static ArrayList<Employee> getEmployees() {
+    public static void main(String[] args) {
         ArrayList<Employee> employeeList = new ArrayList<>();
         HourlyEmployee hourlyEmployeeOne = new HourlyEmployee();
         HourlyEmployee hourlyEmployeeTwo = new HourlyEmployee();
@@ -40,11 +40,6 @@ public class InheritanceDemo {
         employeeList.add(hourlyEmployeeTwo);
         employeeList.add(salariedEmployeeOne);
         employeeList.add(salariedEmployeeTwo);
-        return employeeList;
-    }
-
-    public static void main(String[] args) {
-        ArrayList<Employee> employeeList = getEmployees();
 
         System.out.println("List of Employees (before sorting)");
         employeeList.forEach(System.out::println);
@@ -64,51 +59,5 @@ public class InheritanceDemo {
         });
         Double outputTotalPay = totalPay.get();
         System.out.printf("Total Monthly Pay: $%,.2f%n", outputTotalPay);
-    }
-
-    public static File getMainOutputFile() {
-        ArrayList<Employee> employeeList = getEmployees();
-
-        try {
-            File file = File.createTempFile("output-", ".txt");
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                writer.write("List of Employees (before sorting)");
-                writer.newLine();
-                for (Employee emp : employeeList) {
-                    writer.write(emp.toString());
-                    writer.newLine();
-                }
-                writer.newLine();
-
-                Collections.sort(employeeList);
-
-                writer.write("List of Employees (after sorting)");
-                writer.newLine();
-                for (Employee emp : employeeList) {
-                    writer.write(emp.toString());
-                    writer.newLine();
-                }
-                writer.newLine();
-
-                writer.write("Monthly Pay");
-                writer.newLine();
-                double totalPay = 0;
-                for (Employee emp : employeeList) {
-                    double pay = emp.getMonthlyPay();
-                    totalPay += pay;
-                    writer.write(String.format("%s: $%,.2f", emp.getName(), pay));
-                    writer.newLine();
-                }
-                writer.write(String.format("Total Monthly Pay: $%,.2f", totalPay));
-                writer.newLine();
-                writer.flush();
-            }
-
-            return file;
-
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to generate output file", e);
-        }
     }
 }
