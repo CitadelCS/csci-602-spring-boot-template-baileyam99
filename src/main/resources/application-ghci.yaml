@@ -20,9 +20,9 @@ spring:
   application:
     name: csci-602
   datasource:
-    password: admin
-    url: jdbc:postgresql://localhost:5433/testdb
-    username: admin
+    password: AVNS_jOrN9fND-DNxEa1YvMn
+    url: jdbc:postgresql://csci-602-fall-2025-db-do-user-4683876-0.k.db.ondigitalocean.com:25060/abailey7
+    username: abailey7
   mvc:
     servlet:
       load-on-startup: 1
